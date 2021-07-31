@@ -38,12 +38,13 @@ const HomeLogin = () => {
               className='form-control font-monospace'
             />
           </div>
-          <div className='mb-3'>
+          <div className='mb-3 d-flex flex-row justify-content-evenly'>
             <input
               type='button'
               value='Login'
               className='btn btn-success font-monospace'
             />
+            <button className='btn btn-primary font-monospace'>Sign Up</button>
           </div>
         </form>
       </div>
