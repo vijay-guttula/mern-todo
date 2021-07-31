@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div className='container'>
       <div className='login-form'>
@@ -21,6 +24,8 @@ const SignUp = () => {
               name='email'
               type='email'
               className='form-control font-monospace'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <div className='form-text text-mute font-monospace fw-lighter'>
               P.S: We'll never share your email to anyone.
@@ -37,6 +42,8 @@ const SignUp = () => {
               name='password'
               type='password'
               className='form-control font-monospace'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className='mb-3 d-flex flex-row justify-content-evenly'>
