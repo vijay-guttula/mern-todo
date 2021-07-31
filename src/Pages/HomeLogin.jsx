@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeLogin = () => {
   return (
@@ -21,9 +22,6 @@ const HomeLogin = () => {
               type='email'
               className='form-control font-monospace'
             />
-            <div className='form-text text-mute font-monospace fw-lighter'>
-              We'll never share your email to anyone.
-            </div>
           </div>
           <div className='mb-3'>
             <label
@@ -44,7 +42,11 @@ const HomeLogin = () => {
               value='Login'
               className='btn btn-success font-monospace'
             />
-            <button className='btn btn-primary font-monospace'>Sign Up</button>
+            <Link to='/signup'>
+              <button className='btn btn-primary font-monospace'>
+                Sign Up
+              </button>
+            </Link>
           </div>
         </form>
       </div>
