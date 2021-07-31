@@ -1,0 +1,12 @@
+.outer-most {
+  margin: 100px auto;
+}
+
+/* form */
+.login-form {
+  margin: auto;
+  padding: 25px;
+  border: 1px solid antiquewhite;
+  width: 400px;
+  background-color: antiquewhite;
+}
