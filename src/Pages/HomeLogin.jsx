@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => {
+const HomeLogin = () => {
   return (
     <div className='container'>
       <div className='login-form'>
@@ -51,4 +51,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default HomeLogin;
