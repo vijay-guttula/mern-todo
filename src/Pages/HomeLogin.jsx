@@ -13,7 +13,7 @@ const HomeLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await AppRouter.post('/auth/login', {
+      await AppRouter.post('/auth/login', {
         email,
         password,
       });
@@ -22,7 +22,7 @@ const HomeLogin = () => {
       history.push('/todo');
     } catch (error) {
       setError('Incorrect email or password!');
-      console.log(error.message);
+      console.log(error);
     }
   };
 
