@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 const HomeLogin = () => {
+  const { credentials } = useContext(AppContext);
+  if (credentials) {
+    const { email, password } = credentials;
+    console.log(email, password);
+  }
+
   return (
     <div className='container'>
       <div className='login-form'>
