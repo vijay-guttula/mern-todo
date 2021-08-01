@@ -5,6 +5,9 @@ import { AppContext } from '../context/AppContext';
 
 const SignUp = () => {
   const { setCredentials } = useContext(AppContext);
+  const [fullName, setFullName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
@@ -14,6 +17,9 @@ const SignUp = () => {
     event.preventDefault();
     try {
       const response = await AppRouter.post('/auth/signup', {
+        fullName,
+        phoneNumber,
+        username,
         email,
         password,
       });
@@ -28,14 +34,50 @@ const SignUp = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='login-form'>
-        <h1 className='font-monospace fw-lighte'>Hello again,</h1>
+    <div className='signup'>
+      <div className='container'>
+        <h1 className='font-monospace fw-lighter'>Hello again,</h1>
         <p className='text-muted font-monospace fs-6 fw-lighter'>
           Create an account to get started.
         </p>
 
         <form onSubmit={handleSubmit}>
+          <div className='mb-3'>
+            <label htmlFor='fullName' className='form-label font-monospace'>
+              Full Name
+            </label>
+            <input
+              className='form-control font-monospace'
+              type='text'
+              name='fullName'
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='phoneNumber' className='form-label font-monospace'>
+              Phone Number
+            </label>
+            <input
+              className='form-control font-monospace'
+              type='number'
+              name='phoneNumber'
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='username' className='form-label font-monospace'>
+              Username
+            </label>
+            <input
+              className='form-control font-monospace'
+              type='text'
+              name='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
           <div className='mb-3'>
             <label
               htmlFor='email'
@@ -55,15 +97,12 @@ const SignUp = () => {
                 User with the email already exists, please login to continue.
               </p>
             )}
-            <div className='form-text text-mute font-monospace fw-lighter'>
+            <div className='form-text font-monospace fw-lighter'>
               P.S: We'll never share your email to anyone.
             </div>
           </div>
           <div className='mb-3'>
-            <label
-              htmlFor='password'
-              className='form-label text-mute font-monospace'
-            >
+            <label htmlFor='password' className='form-label font-monospace'>
               Password
             </label>
             <input

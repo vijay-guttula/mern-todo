@@ -32,7 +32,7 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 // user sign up
 apiRouter.post('/auth/signup', async (req, res) => {
-  const { email, password } = req.body;
+  const { fullName, phoneNumber, username, email, password } = req.body;
   // const user = await new User({ email, password });
   // await user.save();
   // check email duplication
@@ -47,7 +47,13 @@ apiRouter.post('/auth/signup', async (req, res) => {
   const secretPassword = await bcrypt.hash(password, salt);
 
   // adding the user to the database
-  const user = await User.create({ email, password: secretPassword });
+  const user = await User.create({
+    fullName,
+    phoneNumber,
+    username,
+    email,
+    password: secretPassword,
+  });
   res.status(201).json({
     message: 'User Created Successfully',
     data: user,

@@ -30,6 +30,7 @@ const ToDo = () => {
     if (!newTodoText) return;
     setTodos([...todos, { checked: false, text: newTodoText }]);
     setNewTodoText('');
+    updateBackendTodos();
   };
 
   const toggleTodo = (index) => {
@@ -52,28 +53,52 @@ const ToDo = () => {
   }, []);
 
   return (
-    <div className='container'>
-      <div className='todo'>
-        {todos && <h1>Woah! You got quite a list</h1>}
-        {!todos && <h1>Add down your tasks</h1>}
-        {todos &&
-          todos.map((todo, id) => {
-            return (
-              <div key={id}>
-                <input type='checkbox' onChange={() => toggleTodo(id)} />
-                <label htmlFor=''>{todo.text}</label>
-                <br />
-              </div>
-            );
-          })}
-        <form onSubmit={addTodo}>
-          <input
-            type='text'
-            value={newTodoText}
-            onChange={(e) => setNewTodoText(e.target.value)}
-          />
-          <button type='submit'>Add</button>
-        </form>
+    <div className='todo-container font-monospace'>
+      <div className='container'>
+        <div className='todo-header fw-lighter'>
+          {todos && (
+            <h1 className='mb-5 text-center'>Woah! You got quite a list</h1>
+          )}
+          {!todos && <h1 className='mb-5 text-center'>Add down your tasks</h1>}
+        </div>
+
+        <div className='form-div'>
+          <form
+            onSubmit={addTodo}
+            className='d-flex flex-row justify-content-center'
+          >
+            <div className='mb-3'>
+              <input
+                className='form-control font-monospace'
+                type='text'
+                value={newTodoText}
+                onChange={(e) => setNewTodoText(e.target.value)}
+              />
+            </div>
+            <button className='todo-add btn btn-danger ms-4' type='submit'>
+              Add
+            </button>
+          </form>
+        </div>
+
+        <div className='container todo'>
+          {todos &&
+            todos.map((todo, id) => {
+              return (
+                <div className='todo-element font-monospace' key={id}>
+                  <input
+                    className='form-check-input ms-5'
+                    type='checkbox'
+                    onChange={() => toggleTodo(id)}
+                  />
+                  <label className='form-label ms-2' htmlFor=''>
+                    {todo.text}
+                  </label>
+                  <br />
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );
