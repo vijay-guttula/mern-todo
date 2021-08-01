@@ -2,7 +2,8 @@ const express = require('express');
 const apiRouter = express.Router();
 
 apiRouter.post('/auth/signup', (req, res) => {
-  res.send('Post req received');
+  const { email, password } = req.body;
+  res.send({ email, password });
 });
 
 module.exports = apiRouter;

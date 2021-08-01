@@ -9,7 +9,7 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await AppRouter.post('/auth/signup', { email, password });
-    console.log(response);
+    // console.log(response.data);
   };
 
   return (
