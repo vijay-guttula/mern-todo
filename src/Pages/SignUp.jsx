@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AppRouter from '../apis/AppRouter';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await AppRouter.post('/signup', { email, password });
+    console.log(response);
+  };
 
   return (
     <div className='container'>
@@ -12,7 +19,7 @@ const SignUp = () => {
         <p className='text-muted font-monospace fs-6 fw-lighter'>
           Create an account to get started.
         </p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='mb-3'>
             <label
               htmlFor='email'
@@ -47,10 +54,13 @@ const SignUp = () => {
             />
           </div>
           <div className='mb-3 d-flex flex-row justify-content-evenly'>
+            <input
+              type='submit'
+              value='Create Account'
+              className='btn btn-success font-monospace'
+            />
             <Link to='/'>
-              <button className='btn btn-primary font-monospace'>
-                Create Account
-              </button>
+              <button className='btn btn-danger font-monospace'>Go Back</button>
             </Link>
           </div>
         </form>
