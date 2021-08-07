@@ -7,12 +7,15 @@ const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <a href='/' className='navbar-brand'>
-        Havi Assignment
+        Todo
       </a>
       <div className='d-flex flex-row justify-content-end ms-auto'>
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item'>
-            <a href='https://github.com/vijay-guttula' className='nav-link'>
+            <a
+              href='https://github.com/vijay-guttula/mern-todo'
+              className='nav-link'
+            >
               Github
             </a>
           </li>

@@ -5,7 +5,9 @@ const Footer = () => {
     <footer className='footer mt-auto py-3 bg-light'>
       <div className='container'>
         Made by
-        <span className='text-muted'> Vijay Guttula</span>
+        <a href='https://github.com/vijay-guttula'>
+          <span className='text-muted'> Vijay Guttula</span>
+        </a>
       </div>
     </footer>
   );
