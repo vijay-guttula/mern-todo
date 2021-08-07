@@ -19,7 +19,9 @@
   margin-top: 20px;
 }
 
-nav {
+.navbar {
+  min-width: 492px;
+  width: 100%;
   padding: 25px;
   position: fixed;
   top: 0;
@@ -29,7 +31,6 @@ nav {
 .footer {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: rgb(235, 195, 64);
   position: fixed;
   bottom: 0;
   left: 0;

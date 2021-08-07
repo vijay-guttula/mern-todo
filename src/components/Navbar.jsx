@@ -5,7 +5,7 @@ const Navbar = () => {
   const { loggedIn } = useContext(AppContext);
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+    <nav className='navbar navbar-expand-sm navbar-light bg-light'>
       <a href='/' className='navbar-brand'>
         Todo
       </a>
