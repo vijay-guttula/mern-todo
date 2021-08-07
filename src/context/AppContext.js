@@ -5,6 +5,7 @@ export const AppContext = createContext();
 export const AppContextProvider = (props) => {
   const [credentials, setCredentials] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [justLoggedIn, setJustLoggedIn] = useState(false);
 
   return (
     <AppContext.Provider
@@ -13,6 +14,8 @@ export const AppContextProvider = (props) => {
         setCredentials,
         loggedIn,
         setLoggedIn,
+        justLoggedIn,
+        setJustLoggedIn,
       }}
     >
       {props.children}

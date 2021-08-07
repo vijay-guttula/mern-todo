@@ -23,9 +23,14 @@ const SignUp = () => {
         email,
         password,
       });
-      console.log(response.data);
-      setCredentials({ email, password });
-      history.push('/');
+      console.log(response);
+      setCredentials({
+        email,
+        password,
+        token: response.data.accessToken,
+        userId: response.data.data._id,
+      });
+      history.push('/todos');
     } catch (error) {
       // window.alert('User with the email already exists');
       setIsError(true);

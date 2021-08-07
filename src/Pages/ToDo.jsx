@@ -4,33 +4,39 @@ import AppRouter from '../apis/AppRouter';
 import { AppContext } from '../context/AppContext';
 
 const ToDo = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState();
   const [newTodoText, setNewTodoText] = useState('');
-  const { credentials } = useContext(AppContext);
+  const { credentials, justLoggedIn, setJustLoggedIn } = useContext(AppContext);
   let history = useHistory();
 
   if (!credentials) {
     window.alert('Login to get started');
     history.push('/');
   }
+  let { token, userId } = credentials;
 
-  const updateBackendTodos = async () => {
-    try {
-      const response = await AppRouter.post('/todos', {
-        todos,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  if (!token) {
+    window.alert('Invalid user, Login again to get started');
+    history.push('/');
+  }
 
   const addTodo = (e) => {
     e.preventDefault();
     if (!newTodoText) return;
-    setTodos([...todos, { checked: false, text: newTodoText }]);
+    if (todos.length === 0) {
+      console.log('lenght is 0');
+      setTodos([{ checked: false, text: newTodoText }]);
+    } else {
+      setTodos([
+        ...todos,
+        {
+          checked: false,
+          text: newTodoText,
+        },
+      ]);
+    }
+    console.log('just added', todos);
     setNewTodoText('');
-    updateBackendTodos();
   };
 
   const toggleTodo = (index) => {
@@ -43,14 +49,45 @@ const ToDo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await AppRouter.get('/todos');
+        const response = await AppRouter.get('/todos', {
+          headers: {
+            'x-access-token': token,
+          },
+        });
+        console.log(response);
+        setTodos(response.data.todos.todos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const updateBackendTodos = async () => {
+      console.log('before backend', todos);
+      try {
+        const response = await AppRouter.post(
+          '/todos',
+          {
+            todos,
+          },
+          {
+            headers: {
+              'x-access-token': token,
+            },
+          }
+        );
         console.log(response);
       } catch (error) {
         console.log(error);
       }
     };
-    // fetchData()
-  }, []);
+
+    // right calls
+    if (justLoggedIn) {
+      fetchData();
+      setJustLoggedIn(false);
+    } else {
+      updateBackendTodos();
+    }
+  }, [todos]);
 
   return (
     <div className='todo-container font-monospace'>

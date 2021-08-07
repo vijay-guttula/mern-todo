@@ -4,7 +4,8 @@ import AppRouter from '../apis/AppRouter';
 import { AppContext } from '../context/AppContext';
 
 const HomeLogin = () => {
-  const { setCredentials, setLoggedIn } = useContext(AppContext);
+  const { setCredentials, setLoggedIn, setJustLoggedIn } =
+    useContext(AppContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState();
@@ -13,13 +14,14 @@ const HomeLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await AppRouter.post('/auth/login', {
+      const response = await AppRouter.post('/auth/login', {
         email,
         password,
       });
-      // console.log(response);
-      setCredentials({ email, password });
+      console.log(response);
+      setCredentials({ email, password, token: response.data.accessToken });
       setLoggedIn(true);
+      setJustLoggedIn(true);
       history.push('/todo');
     } catch (error) {
       setError('Incorrect email or password!');
