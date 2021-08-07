@@ -4,7 +4,8 @@ import AppRouter from '../apis/AppRouter';
 import { AppContext } from '../context/AppContext';
 
 const SignUp = () => {
-  const { setCredentials } = useContext(AppContext);
+  const { setCredentials, setLoggedIn, setJustLoggedIn } =
+    useContext(AppContext);
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [username, setUsername] = useState('');
@@ -30,7 +31,9 @@ const SignUp = () => {
         token: response.data.accessToken,
         userId: response.data.data._id,
       });
-      history.push('/todos');
+      setLoggedIn(true);
+      setJustLoggedIn(true);
+      history.push('/todo');
     } catch (error) {
       // window.alert('User with the email already exists');
       setIsError(true);
