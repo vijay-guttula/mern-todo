@@ -92,8 +92,15 @@
   padding: 0px 20px;
 }
 
-.todo-element {
+input[type='checkbox']:checked + label.strikethrough {
+  font-style: italic;
+  text-decoration: line-through;
 }
+
+.todo-elements {
+  margin-bottom: -20px;
+}
+
 /* to hide the arrows in phone number input */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

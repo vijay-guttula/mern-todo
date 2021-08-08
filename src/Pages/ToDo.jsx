@@ -9,14 +9,10 @@ const ToDo = () => {
   const { credentials, justLoggedIn, setJustLoggedIn } = useContext(AppContext);
   let history = useHistory();
 
-  if (!credentials) {
-    window.alert('Login to get started');
-    history.push('/');
-  }
-  let { token, userId } = credentials;
-
-  if (!token) {
-    window.alert('Invalid user, Login again to get started');
+  if (credentials) {
+    var { token } = credentials;
+  } else {
+    window.alert('Credentials missing, Login to get started');
     history.push('/');
   }
 
@@ -122,15 +118,36 @@ const ToDo = () => {
           {todos &&
             todos.map((todo, id) => {
               return (
-                <div className='todo-element font-monospace' key={id}>
-                  <input
-                    className='form-check-input ms-5'
-                    type='checkbox'
-                    onChange={() => toggleTodo(id)}
-                  />
-                  <label className='form-label ms-2' htmlFor=''>
-                    {todo.text}
-                  </label>
+                <div className='todo-elements font-monospace' key={id}>
+                  {todo.checked && (
+                    <div className='todo-element'>
+                      <input
+                        className='form-check-input ms-5'
+                        type='checkbox'
+                        onChange={() => toggleTodo(id)}
+                        checked={true}
+                      />
+                      <label
+                        className='form-label ms-2 strikethrough'
+                        htmlFor=''
+                      >
+                        {todo.text}
+                      </label>
+                    </div>
+                  )}
+                  {!todo.checked && (
+                    <div className='todo-element'>
+                      <input
+                        className='form-check-input ms-5'
+                        type='checkbox'
+                        onChange={() => toggleTodo(id)}
+                      />
+                      <label className='form-label ms-2 ' htmlFor=''>
+                        {todo.text}
+                      </label>
+                    </div>
+                  )}
+
                   <br />
                 </div>
               );
