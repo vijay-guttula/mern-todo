@@ -22,9 +22,13 @@ app.use(express.json());
 app.use('/api/v1/to-do', apiRouter);
 
 // mongodb init
-mongoose.connect(process.env.DB_CONNECTIONSTRING, () => {
-  console.log('Database Connected');
-});
+mongoose.connect(
+  process.env.DB_CONNECTIONSTRING,
+  { useNewUrlParser: true },
+  () => {
+    console.log('Database Connected');
+  }
+);
 
 // for prod
 if (process.env.NODE_ENV === 'production') {
