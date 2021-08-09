@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const apiRouter = require('./routes/ApiRouter');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // initialising
 const app = express();
@@ -25,6 +26,7 @@ mongoose.connect(process.env.DB_CONNECTIONSTRING, () => {
   console.log('Database Connected');
 });
 
+// for prod
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
 }
