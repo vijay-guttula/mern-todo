@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/api/v1/to-do', apiRouter);
 
 // mongodb init
-await mongoose.connect(
+mongoose.connect(
   process.env.DB_CONNECTIONSTRING,
   {
     useNewUrlParser: true,
