@@ -22,9 +22,14 @@ app.use(express.json());
 app.use('/api/v1/to-do', apiRouter);
 
 // mongodb init
-mongoose.connect(
+await mongoose.connect(
   process.env.DB_CONNECTIONSTRING,
-  { useNewUrlParser: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  },
   () => {
     console.log('Database Connected');
   }
